@@ -352,9 +352,10 @@
 <button id="back-to-top-btn" title="Volver arriba">▲</button>
 <script>
     const booksData = [
-           { title: "Sociales 1 Santillana", pages: 124, priceAnillado: 2000, color: true, imgSrc: "img/sociales 1 santillana.JPG", displayPages: 248 },
-          { title: "Geografia 3 Puerto Palos", pages: 117, priceAnillado: 2000, color: true, imgSrc: "img/geografia 3 puerto palos.png", displayPages: 233 },
-          { title: "Geografia 3 Huellas Estrada", pages: 121, priceAnillado: 2000, color: true, imgSrc: "img/Portada geografia 3° huellas.PNG", displayPages: 242 },
+         { title: "El Hilo se corta por lo mas delgado", pages: 6, priceAnillado: 2000, color: true, imgSrc: "img/elhilosecortaporlomasdelgado.JPG", displayPages: 11 },
+	{ title: "Sociales 1 Santillana", pages: 124, priceAnillado: 2000, color: true, imgSrc: "img/sociales 1 santillana.JPG", displayPages: 248 },
+	{ title: "Geografia 3 Puerto Palos", pages: 117, priceAnillado: 2000, color: true, imgSrc: "img/geografia 3 puerto palos.png", displayPages: 233 },
+	{ title: "Geografia 3 Huellas Estrada", pages: 121, priceAnillado: 2000, color: true, imgSrc: "img/Portada geografia 3° huellas.PNG", displayPages: 242 },
         { title: "Nicanor y la luna", pages: 30, priceAnillado: 2000, color: false, imgSrc: "img/Nicanor y la luna.png", displayPages: 60 },
         { title: "NTICx Doble faz", pages: 137, priceAnillado: 2000, color: false, imgSrc: "img/ntick portada.PNG", displayPages: 274 },
         { title: "Aventuras y desventuras de Casiperro del hambre", pages: 32, priceAnillado: 2000, color: false, imgSrc: "img/AVENTURAS Y DESVENTURAS DE CASI PERRO DEL HAMBRE.webp", displayPages: 128 },
@@ -370,7 +371,7 @@
         { title: "El espejo africano", pages: 34, priceAnillado: 2000, color: false, imgSrc: "img/Elespejoafricano.JPG", displayPages: 68 },
         { title: "Mi Planta de Naranja lima ", pages: 48, priceAnillado: 2000, color: false, imgSrc: "img/Mi planta de naranja lima portada 2025.png", displayPages: 96 },
         { title: "El eternauta", pages: 89, priceAnillado: 2000, color: false, imgSrc: "img/El eternauta portada.png", displayPages: 353 },
-        { title: "De como Romeo se tranzo a Julieta", pages: 28, priceAnillado: 2000, color: false, imgSrc: "img/de como romeo se tranzo a julieta portada.JPG", displayPages: 112 },
+        { title: "De como Romeo se tranzo a Julieta", pages: 28, priceAnillado: 2000, color: false, imgSrc: "img/de como romeo se tranzo a julieta portada.bmp", displayPages: 112 },
         { title: "Mitos clasificados 1", pages: 45, priceAnillado: 2000, color: false, imgSrc: "img/mitos clasificados 1 portada.JPG", displayPages: 90 },
         { title: "Prohibido suicidarse en primavera", pages: 28, priceAnillado: 2000, color: false, imgSrc: "img/prohibido suicidarse en primavera portada.JPG", displayPages: 56 },
         { title: "La entrevista", pages: 43, priceAnillado: 2000, color: false, imgSrc: "img/La entrevista portada.JPG", displayPages: 86 },
@@ -387,15 +388,14 @@
         { title: "Los arboles mueren de pie", pages: 51, priceAnillado: 2000, color: false, imgSrc: "img/Los arboles mueres de pie.PNG", displayPages: 102 },
         { title: "La chica pajaro", pages: 38, priceAnillado: 2000, color: false, imgSrc: "img/La chica pajaro.PNG", displayPages: 150 },
         { title: "Mafalda 1", pages: 32, priceAnillado: 2000, color: false, imgSrc: "img/portada mafalda.PNG", displayPages: 128 },
-        { title: "Biologia 2 santillana", pages: 87, priceAnillado: 2000, color: true, imgSrc: "img/BIologia 2 portada.PNG", displayPages: 174 },
-        { title: "Construccion ciudadana 1 Santillana", pages: 65, priceAnillado: 2000, color: true, imgSrc: "img/cdc 1°.PNG", displayPages: 130 },
+        { title: "Biologia 2 santillana", pages: 87, priceAnillado: 2000, color: true, imgSrc: "img/BIologia 2 portada.jpg", displayPages: 174 },
+        { title: "Construccion ciudadana 1 Santillana", pages: 65, priceAnillado: 2000, color: true, imgSrc: "img/cdc 1.jpg", displayPages: 130 },
         { title: "Construccion ciudadana 2 Santillana", pages: 71, priceAnillado: 2000, color: true, imgSrc: "img/ciudadania 2.jpeg", displayPages: 142 },
-        { title: "Construccion ciudadana 3 Santillana", pages: 72, priceAnillado: 2000, color: true, imgSrc: "img/CIUDADANIA 3 PORTADA.PNG", displayPages: 144 },
+        { title: "Construccion ciudadana 3 Santillana", pages: 72, priceAnillado: 2000, color: true, imgSrc: "img/CIUDADANIA 3 PORTADA.jpg", displayPages: 144 },
         { title: "Historia 2 Santillana", pages: 104, priceAnillado: 2000, color: true, imgSrc: "img/portada historia 2°.PNG", displayPages: 208 },
         { title: "Historia 2 Mandioca", pages: 118, priceAnillado: 2000, color: true, imgSrc: "img/portada historia 2° Mandioca.PNG", displayPages: 236 },
         { title: "Historia 1 Mandioca", pages: 79, priceAnillado: 2000, color: true, imgSrc: "img/Portada Historia 1° Mandioca COLOR.PNG", displayPages: 158 },
         { title: "Mitos clasificados 2", pages: 24, priceAnillado: 2000, color: false, imgSrc: "img/Mitos clasificados  2 tapa.jpg", displayPages: 47 },
-        { title: "La isla del tesoro", pages: 49, priceAnillado: 2000, color: false, imgSrc: "img/La isla del tesoro.png", displayPages: 98 }
     ];
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -680,5 +680,4 @@
     });
 </script>
 </body>
-
 </html>
