@@ -311,61 +311,6 @@
             background-color: #03dac6;
             color: #121212;
         }
-        /* Estilos para el nuevo botón flotante del carrito */
-        #view-cart-btn {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            display: none; /* Inicialmente oculto */
-            background-color: #ff9800;
-            color: white;
-            border: none;
-            padding: 15px 25px;
-            border-radius: 30px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s, background-color 0.3s;
-            z-index: 999;
-        }
-        #view-cart-btn:hover {
-            transform: scale(1.05);
-            background-color: #e68a00;
-        }
-        body.dark-mode #view-cart-btn {
-            background-color: #f57c00;
-        }
-        body.dark-mode #view-cart-btn:hover {
-            background-color: #ef6c00;
-        }
-        /* MOBILE FIRST: Estilos para pantallas pequeñas */
-        @media (max-width: 768px) {
-            .book {
-                width: 100%;
-                display: flex;
-                flex-direction: row;
-                text-align: left;
-                padding: 10px;
-            }
-            .book-img {
-                width: 100px;
-                height: 133px;
-                flex-shrink: 0;
-                margin-right: 15px;
-                margin-bottom: 0;
-            }
-            .book-content {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                flex-grow: 1;
-            }
-            .book-img:hover {
-                transform: none; /* Desactivar el efecto de zoom en móviles */
-                filter: none;
-            }
-        }
     </style>
 </head>
 <body>
@@ -405,8 +350,6 @@
     </div>
 </div>
 <button id="back-to-top-btn" title="Volver arriba">▲</button>
-<button id="view-cart-btn" style="display: none;">Ver Carrito</button>
-
 <script>
     const booksData = [
         { title: "El Hilo se corta por lo mas delgado", pages: 6, priceAnillado: 2000, color: true, imgSrc: "img/elhilosecortaporlomasdelgado.bmp", displayPages: 11 },
@@ -464,7 +407,6 @@
         const searchInput = document.getElementById('search-input');
         const mpDetailsContainer = document.getElementById('mp-details-container');
         const notification = document.getElementById('notification');
-        const viewCartBtn = document.getElementById('view-cart-btn');
         let cart = [];
 
         function renderBooks(books) {
@@ -485,22 +427,20 @@
 
                 bookElement.innerHTML = `
                     <img src="${book.imgSrc}" alt="Portada de ${book.title}" class="book-img">
-                    <div class="book-content">
-                        <h3 class="book-title">${book.title}</h3>
-                        <p class="book-pages">${book.displayPages} páginas</p>
-                        <p class="book-price"></p>
-                        <div class="book-format">
-                            <input type="radio" id="color-${uniqueId}" name="format-${uniqueId}" value="color" ${colorDisabled}>
-                            <label for="color-${uniqueId}" class="color-label" ${colorLabelStyle}>${colorLabelText}</label>
-                            <input type="radio" id="bw-${uniqueId}" name="format-${uniqueId}" value="bw" checked>
-                            <label for="bw-${uniqueId}">B/N</label>
-                        </div>
-                        <div class="book-binding">
-                            <input type="checkbox" id="anillado-${uniqueId}" class="anillado-checkbox">
-                            <label for="anillado-${uniqueId}">Anillado (+$${book.priceAnillado})</label>
-                        </div>
-                        <button class="add-to-cart-btn">Agregar al carrito</button>
+                    <h3 class="book-title">${book.title}</h3>
+                    <p class="book-pages">${book.displayPages} páginas</p>
+                    <p class="book-price"></p>
+                    <div class="book-format">
+                        <input type="radio" id="color-${uniqueId}" name="format-${uniqueId}" value="color" ${colorDisabled}>
+                        <label for="color-${uniqueId}" class="color-label" ${colorLabelStyle}>${colorLabelText}</label>
+                        <input type="radio" id="bw-${uniqueId}" name="format-${uniqueId}" value="bw" checked>
+                        <label for="bw-${uniqueId}">B/N</label>
                     </div>
+                    <div class="book-binding">
+                        <input type="checkbox" id="anillado-${uniqueId}" class="anillado-checkbox">
+                        <label for="anillado-${uniqueId}">Anillado (+$${book.priceAnillado})</label>
+                    </div>
+                    <button class="add-to-cart-btn">Agregar al carrito</button>
                 `;
                 catalogContainer.appendChild(bookElement);
             });
@@ -554,13 +494,6 @@
             });
             const totalEnLetras = numeroALetras(total);
             cartTotalDisplay.innerHTML = `Total: $${total.toFixed(2)} <br> <span style="font-size: 0.8em; color: #555;">(${totalEnLetras} pesos)</span>`;
-            
-            // Lógica para mostrar/ocultar el botón flotante
-            if (cart.length > 0) {
-                viewCartBtn.style.display = 'block';
-            } else {
-                viewCartBtn.style.display = 'none';
-            }
         }
 
         // --- FUNCIÓN CORREGIDA ---
@@ -707,11 +640,6 @@
             const searchTerm = event.target.value.toLowerCase();
             const filteredBooks = booksData.filter(book => book.title.toLowerCase().includes(searchTerm));
             renderBooks(filteredBooks);
-        });
-
-        viewCartBtn.addEventListener('click', () => {
-            // Desplazarse a la sección del carrito
-            document.querySelector('.cart-section').scrollIntoView({ behavior: 'smooth' });
         });
 
         const toggleThemeBtn = document.getElementById('toggle-theme-btn');
