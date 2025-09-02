@@ -247,8 +247,8 @@
             background-color: #388e3c;
         }
         .book-img:hover {
-            transform: scale(1.2);
-            transition: 0.5s;
+           //transform: scale(1.2);
+            //transition: 0.5s;
             filter: grayscale(0%);
         }
         #mp-details-container {
@@ -462,9 +462,9 @@
                     <p class="book-pages">${book.displayPages} páginas</p>
                     <p class="book-price"></p>
                     <div class="book-format">
-                        <input type="radio" id="color-${uniqueId}" name="format-${uniqueId}" value="color" ${colorDisabled}>
+                        <input type="radio" id="color-${uniqueId}" name="format-${uniqueId}" value="color" ${colorDisabled} ${hasColor ? 'checked' : ''}>
                         <label for="color-${uniqueId}" class="color-label" ${colorLabelStyle}>${colorLabelText}</label>
-                        <input type="radio" id="bw-${uniqueId}" name="format-${uniqueId}" value="bw" checked>
+                        <input type="radio" id="bw-${uniqueId}" name="format-${uniqueId}" value="bw" ${!hasColor ? 'checked' : ''}>
                         <label for="bw-${uniqueId}">B/N</label>
                     </div>
                     <div class="book-binding">
@@ -538,23 +538,21 @@
         function updateBookPrice(bookElement) {
             const pages = parseFloat(bookElement.dataset.pages);
             const priceElement = bookElement.querySelector('.book-price');
-            const formatInput = bookElement.querySelector('input[value="bw"]'); // Busca el input B/N que siempre existe
+            const formatInput = bookElement.querySelector('input[value="color"]'); // Busca el input de Color
             const anilladoCheckbox = bookElement.querySelector('.anillado-checkbox');
             const anilladoPrice = parseFloat(bookElement.dataset.priceAnillado);
             let basePrice;
             const imageElement = bookElement.querySelector('.book-img');
 
-            // Determina el formato basándose en si el botón B/N está marcado o no
-            const isBw = formatInput.checked;
+            const isColor = formatInput.checked;
 
-            if (isBw) {
-                basePrice = pages * 70;
-                imageElement.classList.add('bw-filter');
-            } else {
+            if (isColor) {
                 basePrice = pages * 250;
                 imageElement.classList.remove('bw-filter');
+            } else {
+                basePrice = pages * 70;
+                imageElement.classList.add('bw-filter');
             }
-
             if (anilladoCheckbox.checked) {
                 basePrice += anilladoPrice;
             }
@@ -682,7 +680,7 @@
 
         viewCartBtn.addEventListener('click', () => {
             // Desplazarse a la sección del carrito
-            document.querySelector('.cart-section').scrollIntoView({ behavior: 'smooth' });
+            document.querySelector('.cart-section').scrollIntoView({ behavior: 'auto' });
         });
 
         const toggleThemeBtn = document.getElementById('toggle-theme-btn');
