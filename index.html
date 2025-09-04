@@ -25,19 +25,23 @@
             text-align: center;
             color: #444;
         }
+        /* --- CORRECCIÓN APLICADA AQUÍ --- */
         .search-container {
             text-align: center;
             margin-bottom: 20px;
             position: sticky;
-            top: -60px; /* Initially hidden above the viewport */
-            transition: top 0.3s ease-in-out;
+            top: 0; /* Se establece 'top: 0' para que siempre sepa dónde fijarse */
             background: #fff;
             padding: 10px 0;
             z-index: 100;
-        }
-        .search-container.show {
-            top: 0;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            /* Se usa 'transform' para el movimiento, evitando el salto de página */
+            transform: translateY(0);
+            transition: transform 0.3s ease-in-out;
+        }
+        /* Nueva clase para ocultar el buscador moviéndolo hacia arriba */
+        .search-container.search-hidden {
+            transform: translateY(-100%);
         }
         #search-input {
             padding: 10px;
@@ -451,6 +455,9 @@
 
 <script>
     const booksData = [
+{ title: "Biologia 3 Santillana", pages:80, priceAnillado: 2000, color:true, imgSrc: "img/biologia 3 santillana.bmp", displayPages:160 },
+	{ title: "Socorro", pages:43, priceAnillado: 2000, color:false, imgSrc: "img/socorro.bmp", displayPages:85 },
+	{ title: "Escuela de Discipulado para nuevos creyentes ABC", pages:54, priceAnillado: 2000, color:false, imgSrc: "img/ESCUELA DE DISCIPULADO PARA NUEVOS CREYENTES.bmp", displayPages:108 },
 	{ title: "Rebelion en la granja", pages:32, priceAnillado: 2000, color:false, imgSrc: "img/rebelion en lagranja.bmp", displayPages:64 },
 	{ title: "Intermitente Rafaela Mariana Furiasse", pages:56, priceAnillado: 2000, color:false, imgSrc: "img/intermitente rafaela.JPG", displayPages:112 },
 	{ title: "Rafaela Mariana Furiasse", pages: 31, priceAnillado: 2000, color:false, imgSrc: "img/Rafaela Mariana Furiasse.bmp", displayPages:62 },
@@ -464,50 +471,50 @@
 	{ title: "Naturales 1 Santillana ", pages: 107, priceAnillado: 2000, color: true, imgSrc: "img/portada naturales 1.bmp", displayPages: 214 },
 	{ title: "Los vecinos mueren en las novelas ", pages: 38, priceAnillado: 2000, color: false, imgSrc: "img/losvecinosmuerenenlanovelas.bmp", displayPages: 76 },
 	{ title: "Caro dice", pages: 60, priceAnillado: 2000, color: false, imgSrc: "img/Caro dice.bmp", displayPages: 238 },
-                 { title: "El Hilo se corta por lo mas delgado", pages: 6, priceAnillado: 2000, color: true, imgSrc: "img/elhilosecortaporlomasdelgado.bmp", displayPages: 11 },
+    { title: "El Hilo se corta por lo mas delgado", pages: 6, priceAnillado: 2000, color: true, imgSrc: "img/elhilosecortaporlomasdelgado.bmp", displayPages: 11 },
 	{ title: "Sociales 1 Santillana", pages: 124, priceAnillado: 2000, color: true, imgSrc: "img/sociales 1 santillana.JPG", displayPages: 248 },
 	{ title: "Geografia 3 Puerto Palos", pages: 117, priceAnillado: 2000, color: true, imgSrc: "img/geografia 3 puerto palos.png", displayPages: 233 },
 	{ title: "Geografia 3 Huellas Estrada", pages: 121, priceAnillado: 2000, color: true, imgSrc: "img/Portada geografia 3° huellas.PNG", displayPages: 242 },
-        { title: "Nicanor y la luna", pages: 30, priceAnillado: 2000, color: false, imgSrc: "img/Nicanor y la luna.png", displayPages: 60 },
-        { title: "NTICx Doble faz", pages: 137, priceAnillado: 2000, color: false, imgSrc: "img/ntick portada.PNG", displayPages: 274 },
-        { title: "Aventuras y desventuras de Casiperro del hambre", pages: 32, priceAnillado: 2000, color: false, imgSrc: "img/AVENTURAS Y DESVENTURAS DE CASI PERRO DEL HAMBRE.webp", displayPages: 128 },
-        { title: "NTICx Apaisado", pages: 69, priceAnillado: 2000, color: false, imgSrc: "img/ntick portada.PNG", displayPages: 274 },
-        { title: "Trabajo y ciudadania Maipue Doble faz", pages: 71, priceAnillado: 2000, color: false, imgSrc: "img/Trabajo y ciudadania portada.jpg", displayPages: 142 },
-        { title: "Trabajo y ciudadania Maipue Apaisado", pages: 36, priceAnillado: 2000, color: false, imgSrc: "img/Trabajo y ciudadania portada.jpg", displayPages: 142 },
-        { title: "Geografia 2 Santillana", pages: 104, priceAnillado: 2000, color: true, imgSrc: "img/tapa geografia.PNG", displayPages: 208 },
-        { title: "Fisica y quimica 2 sm", pages: 99, priceAnillado: 2000, color: true, imgSrc: "img/Fisica quimica 2.PNG", displayPages: 198 },
-        { title: "Fisica y quimica 3 sm", pages: 100, priceAnillado: 2000, color: true, imgSrc: "img/Fisica quimica 3°.PNG", displayPages: 200 },
-        { title: "Historia 3 Estrada", pages: 120, priceAnillado: 2000, color: true, imgSrc: "img/Historia 3° estrada.PNG", displayPages: 240 },
-        { title: "La tercera palabra", pages: 29, priceAnillado: 2000, color: false, imgSrc: "img/La Tercera Palabra.JPG", displayPages: 58 },
-        { title: "La isla del tesoro", pages: 49, priceAnillado: 2000, color: false, imgSrc: "img/La isla del tesoro.png", displayPages: 98 },
-        { title: "El espejo africano", pages: 34, priceAnillado: 2000, color: false, imgSrc: "img/Elespejoafricano.JPG", displayPages: 68 },
-        { title: "Mi Planta de Naranja lima ", pages: 48, priceAnillado: 2000, color: false, imgSrc: "img/Mi planta de naranja lima portada 2025.png", displayPages: 96 },
-        { title: "El eternauta", pages: 89, priceAnillado: 2000, color: false, imgSrc: "img/El eternauta portada.png", displayPages: 353 },
-        { title: "De como Romeo se tranzo a Julieta", pages: 28, priceAnillado: 2000, color: false, imgSrc: "img/de como romeo se tranzo a julieta portada.bmp", displayPages: 112 },
-        { title: "Mitos clasificados 1", pages: 45, priceAnillado: 2000, color: false, imgSrc: "img/mitos clasificados 1 portada.JPG", displayPages: 90 },
-        { title: "Prohibido suicidarse en primavera", pages: 28, priceAnillado: 2000, color: false, imgSrc: "img/prohibido suicidarse en primavera portada.JPG", displayPages: 56 },
-        { title: "La entrevista", pages: 43, priceAnillado: 2000, color: false, imgSrc: "img/La entrevista portada.JPG", displayPages: 86 },
-        { title: "Boda de sangre", pages: 19, priceAnillado: 2000, color: false, imgSrc: "img/boda de sangre portada.JPG", displayPages: 37 },
-        { title: "Amigos por el viento", pages: 19, priceAnillado: 2000, color: false, imgSrc: "img/amigos por el viento.png", displayPages: 38 },
-        { title: "Ceremonia secreta", pages: 29, priceAnillado: 2000, color: false, imgSrc: "img/ceremonia secreta.JPG", displayPages: 57 },
-        { title: "Casa de muñecas", pages: 54, priceAnillado: 2000, color: false, imgSrc: "img/casa de muñecas.JPG", displayPages: 108 },
-        { title: "La casa de Bernarda Alba", pages: 25, priceAnillado: 2000, color: false, imgSrc: "img/La casa de bernarda alba 2025.png", displayPages: 50 },
-        { title: "La increíble y triste historia de la cándida Eréndida y su abuela desalmada", pages: 18, priceAnillado: 2000, color: false, imgSrc: "img/La increíble y triste historia de la cándida Eréndida  y su abuela desalmada.JPG", displayPages: 36 },
-        { title: "Historia 3 Mandioca", pages: 119, priceAnillado: 2000, color: true, imgSrc: "img/Historia 3 Mandioca.PNG", displayPages: 238 },
-        { title: "Historia 3 Santillana", pages: 118, priceAnillado: 2000, color: true, imgSrc: "img/HISTORIA 3 SANTILLANA.JPG", displayPages: 236 },
-        { title: "Buscando a mister i la amistad vence al bullyin", pages: 48, priceAnillado: 2000, color: false, imgSrc: "img/Buscando a mister I.JPG", displayPages: 96 },
-        { title: "El diablo de la botella", pages: 14, priceAnillado: 2000, color: false, imgSrc: "img/el diablo de la botella .jpeg", displayPages: 28 },
-        { title: "Los arboles mueren de pie", pages: 51, priceAnillado: 2000, color: false, imgSrc: "img/Los arboles mueres de pie.PNG", displayPages: 102 },
-        { title: "La chica pajaro", pages: 38, priceAnillado: 2000, color: false, imgSrc: "img/La chica pajaro.bmp", displayPages: 150 },
-        { title: "Mafalda 1", pages: 32, priceAnillado: 2000, color: false, imgSrc: "img/portada mafalda.PNG", displayPages: 128 },
-        { title: "Biologia 2 santillana", pages: 87, priceAnillado: 2000, color: true, imgSrc: "img/BIologia 2 portada.jpg", displayPages: 174 },
-        { title: "Construccion ciudadana 1 Santillana", pages: 65, priceAnillado: 2000, color: true, imgSrc: "img/cdc 1.jpg", displayPages: 130 },
-        { title: "Construccion ciudadana 2 Santillana", pages: 71, priceAnillado: 2000, color: true, imgSrc: "img/ciudadania 2.jpeg", displayPages: 142 },
-        { title: "Construccion ciudadana 3 Santillana", pages: 72, priceAnillado: 2000, color: true, imgSrc: "img/CIUDADANIA 3 PORTADA.jpg", displayPages: 144 },
-        { title: "Historia 2 Santillana", pages: 104, priceAnillado: 2000, color: true, imgSrc: "img/portada historia 2°.PNG", displayPages: 208 },
-        { title: "Historia 2 Mandioca", pages: 118, priceAnillado: 2000, color: true, imgSrc: "img/portada historia 2° Mandioca.PNG", displayPages: 236 },
-        { title: "Historia 1 Mandioca", pages: 79, priceAnillado: 2000, color: true, imgSrc: "img/Portada Historia 1Mandioca COLOR.bmp", displayPages: 158 },
-        { title: "Mitos clasificados 2", pages: 24, priceAnillado: 2000, color: false, imgSrc: "img/Mitos clasificados  2 tapa.jpg", displayPages: 47 },
+    { title: "Nicanor y la luna", pages: 30, priceAnillado: 2000, color: false, imgSrc: "img/Nicanor y la luna.png", displayPages: 60 },
+    { title: "NTICx Doble faz", pages: 137, priceAnillado: 2000, color: false, imgSrc: "img/ntick portada.PNG", displayPages: 274 },
+    { title: "Aventuras y desventuras de Casiperro del hambre", pages: 32, priceAnillado: 2000, color: false, imgSrc: "img/AVENTURAS Y DESVENTURAS DE CASI PERRO DEL HAMBRE.webp", displayPages: 128 },
+    { title: "NTICx Apaisado", pages: 69, priceAnillado: 2000, color: false, imgSrc: "img/ntick portada.PNG", displayPages: 274 },
+    { title: "Trabajo y ciudadania Maipue Doble faz", pages: 71, priceAnillado: 2000, color: false, imgSrc: "img/Trabajo y ciudadania portada.jpg", displayPages: 142 },
+    { title: "Trabajo y ciudadania Maipue Apaisado", pages: 36, priceAnillado: 2000, color: false, imgSrc: "img/Trabajo y ciudadania portada.jpg", displayPages: 142 },
+    { title: "Geografia 2 Santillana", pages: 104, priceAnillado: 2000, color: true, imgSrc: "img/tapa geografia.PNG", displayPages: 208 },
+    { title: "Fisica y quimica 2 sm", pages: 99, priceAnillado: 2000, color: true, imgSrc: "img/Fisica quimica 2.PNG", displayPages: 198 },
+    { title: "Fisica y quimica 3 sm", pages: 100, priceAnillado: 2000, color: true, imgSrc: "img/Fisica quimica 3°.PNG", displayPages: 200 },
+    { title: "Historia 3 Estrada", pages: 120, priceAnillado: 2000, color: true, imgSrc: "img/Historia 3° estrada.PNG", displayPages: 240 },
+    { title: "La tercera palabra", pages: 29, priceAnillado: 2000, color: false, imgSrc: "img/La Tercera Palabra.JPG", displayPages: 58 },
+    { title: "La isla del tesoro", pages: 49, priceAnillado: 2000, color: false, imgSrc: "img/La isla del tesoro.png", displayPages: 98 },
+    { title: "El espejo africano", pages: 34, priceAnillado: 2000, color: false, imgSrc: "img/Elespejoafricano.JPG", displayPages: 68 },
+    { title: "Mi Planta de Naranja lima ", pages: 48, priceAnillado: 2000, color: false, imgSrc: "img/Mi planta de naranja lima portada 2025.png", displayPages: 96 },
+    { title: "El eternauta", pages: 89, priceAnillado: 2000, color: false, imgSrc: "img/El eternauta portada.png", displayPages: 353 },
+    { title: "De como Romeo se tranzo a Julieta", pages: 28, priceAnillado: 2000, color: false, imgSrc: "img/de como romeo se tranzo a julieta portada.bmp", displayPages: 112 },
+    { title: "Mitos clasificados 1", pages: 45, priceAnillado: 2000, color: false, imgSrc: "img/mitos clasificados 1 portada.JPG", displayPages: 90 },
+    { title: "Prohibido suicidarse en primavera", pages: 28, priceAnillado: 2000, color: false, imgSrc: "img/prohibido suicidarse en primavera portada.JPG", displayPages: 56 },
+    { title: "La entrevista", pages: 43, priceAnillado: 2000, color: false, imgSrc: "img/La entrevista portada.JPG", displayPages: 86 },
+    { title: "Boda de sangre", pages: 19, priceAnillado: 2000, color: false, imgSrc: "img/boda de sangre portada.JPG", displayPages: 37 },
+    { title: "Amigos por el viento", pages: 19, priceAnillado: 2000, color: false, imgSrc: "img/amigos por el viento.png", displayPages: 38 },
+    { title: "Ceremonia secreta", pages: 29, priceAnillado: 2000, color: false, imgSrc: "img/ceremonia secreta.JPG", displayPages: 57 },
+    { title: "Casa de muñecas", pages: 54, priceAnillado: 2000, color: false, imgSrc: "img/casa de muñecas.JPG", displayPages: 108 },
+    { title: "La casa de Bernarda Alba", pages: 25, priceAnillado: 2000, color: false, imgSrc: "img/La casa de bernarda alba 2025.png", displayPages: 50 },
+    { title: "La increíble y triste historia de la cándida Eréndida y su abuela desalmada", pages: 18, priceAnillado: 2000, color: false, imgSrc: "img/La increíble y triste historia de la cándida Eréndida  y su abuela desalmada.JPG", displayPages: 36 },
+    { title: "Historia 3 Mandioca", pages: 119, priceAnillado: 2000, color: true, imgSrc: "img/Historia 3 Mandioca.PNG", displayPages: 238 },
+    { title: "Historia 3 Santillana", pages: 118, priceAnillado: 2000, color: true, imgSrc: "img/HISTORIA 3 SANTILLANA.JPG", displayPages: 236 },
+    { title: "Buscando a mister i la amistad vence al bullyin", pages: 48, priceAnillado: 2000, color: false, imgSrc: "img/Buscando a mister I.JPG", displayPages: 96 },
+    { title: "El diablo de la botella", pages: 14, priceAnillado: 2000, color: false, imgSrc: "img/el diablo de la botella .jpeg", displayPages: 28 },
+    { title: "Los arboles mueren de pie", pages: 51, priceAnillado: 2000, color: false, imgSrc: "img/Los arboles mueres de pie.PNG", displayPages: 102 },
+    { title: "La chica pajaro", pages: 38, priceAnillado: 2000, color: false, imgSrc: "img/La chica pajaro.bmp", displayPages: 150 },
+    { title: "Mafalda 1", pages: 32, priceAnillado: 2000, color: false, imgSrc: "img/portada mafalda.PNG", displayPages: 128 },
+    { title: "Biologia 2 santillana", pages: 87, priceAnillado: 2000, color: true, imgSrc: "img/BIologia 2 portada.jpg", displayPages: 174 },
+    { title: "Construccion ciudadania 1 Santillana", pages: 65, priceAnillado: 2000, color: true, imgSrc: "img/cdc 1.jpg", displayPages: 130 },
+    { title: "Construccion ciudadania 2 Santillana", pages: 71, priceAnillado: 2000, color: true, imgSrc: "img/ciudadania 2.jpeg", displayPages: 142 },
+    { title: "Construccion ciudadania 3 Santillana", pages: 72, priceAnillado: 2000, color: true, imgSrc: "img/CIUDADANIA 3 PORTADA.jpg", displayPages: 144 },
+    { title: "Historia 2 Santillana", pages: 104, priceAnillado: 2000, color: true, imgSrc: "img/portada historia 2°.PNG", displayPages: 208 },
+    { title: "Historia 2 Mandioca", pages: 118, priceAnillado: 2000, color: true, imgSrc: "img/portada historia 2° Mandioca.PNG", displayPages: 236 },
+    { title: "Historia 1 Mandioca", pages: 79, priceAnillado: 2000, color: true, imgSrc: "img/Portada Historia 1Mandioca COLOR.bmp", displayPages: 158 },
+    { title: "Mitos clasificados 2", pages: 24, priceAnillado: 2000, color: false, imgSrc: "img/Mitos clasificados  2 tapa.jpg", displayPages: 47 },
     ];
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -612,7 +619,6 @@
             const totalEnLetras = numeroALetras(total);
             cartTotalDisplay.innerHTML = `Total: $${total.toFixed(2)} <br> <span style="font-size: 0.8em; color: #555;">(${totalEnLetras} pesos)</span>`;
             
-            // Lógica para mostrar/ocultar el botón flotante
             if (cart.length > 0) {
                 viewCartBtn.style.display = 'block';
             } else {
@@ -620,11 +626,10 @@
             }
         }
 
-        // --- FUNCIÓN CORREGIDA ---
         function updateBookPrice(bookElement) {
             const pages = parseFloat(bookElement.dataset.pages);
             const priceElement = bookElement.querySelector('.book-price');
-            const formatInput = bookElement.querySelector('input[value="color"]'); // Busca el input de Color
+            const formatInput = bookElement.querySelector('input[value="color"]');
             const anilladoCheckbox = bookElement.querySelector('.anillado-checkbox');
             const anilladoPrice = parseFloat(bookElement.dataset.priceAnillado);
             let basePrice;
@@ -694,7 +699,7 @@
             });
 
             document.querySelectorAll('.book').forEach(book => {
-                updateBookPrice(book); // Initial price calculation
+                updateBookPrice(book); 
                 book.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(input => {
                     input.addEventListener('change', () => updateBookPrice(book));
                 });
@@ -765,7 +770,6 @@
         });
 
         viewCartBtn.addEventListener('click', () => {
-            // Desplazarse a la sección del carrito
             document.querySelector('.cart-section').scrollIntoView({ behavior: 'auto' });
         });
 
@@ -818,15 +822,18 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
+        // --- LÓGICA DE JAVASCRIPT CORREGIDA ---
         window.addEventListener('scroll', () => {
-            if (window.scrollY < lastScrollY) {
-                // Scrolling up
-                searchContainer.classList.add('show');
+            // Se usa una nueva clase 'search-hidden' para ocultar/mostrar con 'transform'
+            if (window.scrollY > lastScrollY && window.scrollY > 100) {
+                // Si se baja el scroll y no se está en la parte superior, se oculta el buscador
+                searchContainer.classList.add('search-hidden');
             } else {
-                // Scrolling down
-                searchContainer.classList.remove('show');
+                // Si se sube el scroll, se muestra el buscador
+                searchContainer.classList.remove('search-hidden');
             }
-            lastScrollY = window.scrollY;
+            // Actualiza la última posición del scroll
+            lastScrollY = window.scrollY <= 0 ? 0 : window.scrollY;
         });
     });
 </script>
